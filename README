@@ -1,0 +1,19 @@
+QtViewer
+--------
+28 January 2010
+debayan@forwardbias.in
+
+This is a very basic image viewer written in Qt4. It is intended to serve as an example for people who are learning Qt.
+
+You must have Qt4 devel packages installed.
+
+To build the project follow these steps:
+
+1) Type qmake-qt4 
+2) Type make
+3) ./imageViewer
+
+You may drag and drop images to the window. 
+
+
+
