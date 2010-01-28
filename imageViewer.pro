@@ -6,7 +6,7 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
 INCLUDEPATH += .
-FORMS += untitled.ui
+FORMS += imageViewer.ui
 
 # Input
 HEADERS += dropArea.h dropSiteWindow.h
