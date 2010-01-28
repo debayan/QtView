@@ -70,24 +70,65 @@ void DropArea::dragLeaveEvent(QDragLeaveEvent *event)
 void DropArea::dropEvent(QDropEvent *event)
 {
 	QString fileName = event->mimeData()->text();
-	int length = fileName.size();
-	if (!fileName.isNull())
+	thread = new Thread(this);
+
+	updateSceneWithText(tr("Trying to determine if this a valid image...."));
+    int length = fileName.size();
+    if (!fileName.isNull())
+    { 
+        fileName = fileName.trimmed();
+        fileName = fileName.right(length - 7); // file:// has 7 chars
+		thread->setFileName(fileName);
+		thread->start();
+    }
+    else 
+    {
+        updateSceneWithText(tr("The file name could not be read"));
+    }
+	event->acceptProposedAction();
+}
+
+
+void DropArea::imageLoadingStatus()
+{
+	if ( thread->isItAnImage() )
 	{
-		fileName = fileName.trimmed();
-		fileName = fileName.right(length - 7); // file:// has 7 chars
-		image.load(fileName);
-			if (image.isNull()) {
-				updateSceneWithText(tr("This does not seem to be a valid file"));
-				return;
-			}
 		updateSceneWithImage();
-		event->acceptProposedAction();
 	}
 	else
 	{
-		updateSceneWithText(tr("The file name could not be read"));
+		updateSceneWithText(tr("Does not seem to be a valid image"));
 	}
+	delete thread;
 }
+
+void Thread::setFileName(QString fileName)
+{
+	imageFileName = fileName;
+}
+
+Thread::Thread(DropArea *parent) : isImage(false)
+{
+	originalProcess = parent;
+}
+
+void Thread::run()
+{
+	originalProcess->image.load(imageFileName);
+	connect ( this, SIGNAL(finished()), originalProcess, SLOT(imageLoadingStatus()) );
+	if ( originalProcess->image.isNull() )
+	{ isImage = false;}
+	else
+	{ isImage = true;}
+}
+
+bool Thread::isItAnImage()
+{
+	if ( isImage ) return true;
+	else
+		return false;
+}
+
 
 void DropArea::keyPressEvent(QKeyEvent *event)
 {
@@ -190,4 +231,3 @@ void DropArea::wheelEvent(QWheelEvent *event)
 	qDebug() << event->delta();
     scaleView(pow((double)2, -event->delta() / 240.0));
 }
-
