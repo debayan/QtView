@@ -25,14 +25,8 @@ DropSiteWindow::DropSiteWindow(const QApplication &app)
 	abstractLabel->setMaximumHeight(20);
 	abstractLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 	
-//	mainLayout = new QVBoxLayout(this);
-//	mainLayout->addWidget(abstractLabel);
-//	mainLayout->addWidget(dropArea);
-//	mainLayout->addLayout( imageViewerUi.verticalLayout_2 );
-//	setLayout(mainLayout);
 	imageViewerUi.verticalLayout_2->addWidget(abstractLabel);
 	imageViewerUi.verticalLayout_2->addWidget(dropArea);
-	
 
 	setWindowTitle(tr("Drop Site"));
     setMinimumSize(350, 500);

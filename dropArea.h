@@ -15,20 +15,19 @@ private:
 	DropArea *originalProcess;
 	QString imageFileName;
 public:
+	QImage *image;
 	void run();
 	Thread(DropArea *);
 	void setFileName(QString);
 	bool isItAnImage();
 };
 
-
-
 class DropArea : public QGraphicsView
 {
 	Q_OBJECT
 public:
 	DropArea();
-	QPixmap image;
+	QPixmap *pixmap;
 
 public slots:
 	void rotateView(qreal degrees);

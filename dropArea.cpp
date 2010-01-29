@@ -17,30 +17,53 @@ DropArea::DropArea() :  isCtrlPressed(false)
 	pixmapItem = new QGraphicsPixmapItem(0,scene);
 	setTransformationAnchor(QGraphicsView::NoAnchor);
 	setDragMode(QGraphicsView::ScrollHandDrag);
+	pixmap = new QPixmap;
 }
 
 void DropArea::dragEnterEvent(QDragEnterEvent *event)
 {
-	QString fileName = event->mimeData()->text();                            
-    int length = fileName.size();                                            
-    if (!fileName.isNull())                                                  
-    {                                                                        
-		fileName = fileName.trimmed();                                       
-		fileName = fileName.right(length - 7); // file:// has 7 chars        
-		QPixmap image(fileName);                                             
-			if (image.isNull()) {                                            
-				updateSceneWithText(tr("This does not seem to be a valid file"));
-				event->acceptProposedAction();
-				return;                                                      
-			}
-		updateSceneWithText(tr("Looks like an image. Drop it."));
-		event->acceptProposedAction();
-    }                                                                        
-    else                                                                     
-    {                                                                        
-		updateSceneWithText(tr("The file name could not be read"));
-    }          
+	QString fileName = event->mimeData()->text();
+    thread = new Thread(this);
+
+    updateSceneWithText(tr("Trying to determine if this a valid image...."));
+    int length = fileName.size();
+    if (!fileName.isNull())
+    {
+        fileName = fileName.trimmed();
+        fileName = fileName.right(length - 9); // file:// has 7 chars
+        thread->setFileName(fileName);
+        thread->start();
+    }
+    else
+    {
+        updateSceneWithText(tr("The file name could not be read"));
+    }
+    event->acceptProposedAction();
 }
+
+void DropArea::dragMoveEvent(QDragMoveEvent *event)
+{
+	event->acceptProposedAction(); 
+}
+
+void DropArea::dragLeaveEvent(QDragLeaveEvent *event)
+{
+	thread->wait();
+	delete thread;
+	event->accept();
+	updateSceneWithText(tr("This is the Drop Site"));
+}
+
+void DropArea::dropEvent(QDropEvent *event)
+{
+	if ( thread->isItAnImage() )
+	{
+		delete thread; 
+		updateSceneWithImage(); 
+	}
+	event->acceptProposedAction();
+}
+
 
 void DropArea::updateSceneWithText(QString messageOnEvent)
 {
@@ -51,83 +74,27 @@ void DropArea::updateSceneWithText(QString messageOnEvent)
 
 void DropArea::updateSceneWithImage()
 {
-	pixmapItem->show();
+	resetTransform();
 	messageItem->hide();
-	pixmapItem->setPixmap(image);
+	pixmapItem->show();
+	pixmapItem->setPixmap(*pixmap);
 }
-
-void DropArea::dragMoveEvent(QDragMoveEvent *event)
-{
-	event->acceptProposedAction(); 
-}
-
-void DropArea::dragLeaveEvent(QDragLeaveEvent *event)
-{
-	event->accept();
-	updateSceneWithText(tr("This is the Drop Site"));
-}
-
-void DropArea::dropEvent(QDropEvent *event)
-{
-	QString fileName = event->mimeData()->text();
-	thread = new Thread(this);
-
-	updateSceneWithText(tr("Trying to determine if this a valid image...."));
-    int length = fileName.size();
-    if (!fileName.isNull())
-    { 
-        fileName = fileName.trimmed();
-        fileName = fileName.right(length - 7); // file:// has 7 chars
-		thread->setFileName(fileName);
-		thread->start();
-    }
-    else 
-    {
-        updateSceneWithText(tr("The file name could not be read"));
-    }
-	event->acceptProposedAction();
-}
-
 
 void DropArea::imageLoadingStatus()
 {
 	if ( thread->isItAnImage() )
 	{
-		updateSceneWithImage();
+		updateSceneWithText(tr("Looks like a valid image. Drop it"));
+		*pixmap = pixmap->fromImage(*thread->image);
+		
 	}
 	else
 	{
 		updateSceneWithText(tr("Does not seem to be a valid image"));
 	}
-	delete thread;
+	delete thread->image;
 }
 
-void Thread::setFileName(QString fileName)
-{
-	imageFileName = fileName;
-}
-
-Thread::Thread(DropArea *parent) : isImage(false)
-{
-	originalProcess = parent;
-}
-
-void Thread::run()
-{
-	originalProcess->image.load(imageFileName);
-	connect ( this, SIGNAL(finished()), originalProcess, SLOT(imageLoadingStatus()) );
-	if ( originalProcess->image.isNull() )
-	{ isImage = false;}
-	else
-	{ isImage = true;}
-}
-
-bool Thread::isItAnImage()
-{
-	if ( isImage ) return true;
-	else
-		return false;
-}
 
 
 void DropArea::keyPressEvent(QKeyEvent *event)
@@ -214,7 +181,8 @@ void DropArea::translateView(qreal xPixels, qreal yPixels)
 
 void DropArea::clearView()
 {
-    updateSceneWithText(tr("Drop an image here"));      
+	resetTransform();
+    updateSceneWithText(tr("Drop an image here"));
 }
 
 void DropArea::keyReleaseEvent(QKeyEvent *event)
@@ -228,6 +196,33 @@ void DropArea::keyReleaseEvent(QKeyEvent *event)
 
 void DropArea::wheelEvent(QWheelEvent *event)
 {
-	qDebug() << event->delta();
     scaleView(pow((double)2, -event->delta() / 240.0));
 }
+
+void Thread::setFileName(QString fileName)
+{
+	imageFileName = fileName;
+}
+
+Thread::Thread(DropArea *parent) : isImage(false), originalProcess(parent)
+{
+	image = new QImage;
+}
+
+void Thread::run()
+{
+	bool didItLoad = image->load(imageFileName);
+	connect ( this, SIGNAL(finished()), originalProcess, SLOT(imageLoadingStatus()) );
+	if ( didItLoad )
+	{ isImage = true; }
+	else
+	{ isImage = false; }
+}
+
+bool Thread::isItAnImage()
+{
+	if ( isImage ) return true;
+	else
+		return false;
+}
+
