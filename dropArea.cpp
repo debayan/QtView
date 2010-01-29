@@ -24,6 +24,7 @@ void DropArea::dragEnterEvent(QDragEnterEvent *event)
 {
 	QString fileName = event->mimeData()->text();
     thread = new Thread(this);
+	connect( thread, SIGNAL(finished()), this, SLOT(imageLoadingStatus()) );
 
     updateSceneWithText(tr("Trying to determine if this a valid image...."));
     int length = fileName.size();
@@ -94,8 +95,6 @@ void DropArea::imageLoadingStatus()
 	}
 	delete thread->image;
 }
-
-
 
 void DropArea::keyPressEvent(QKeyEvent *event)
 {
@@ -204,7 +203,7 @@ void Thread::setFileName(QString fileName)
 	imageFileName = fileName;
 }
 
-Thread::Thread(DropArea *parent) : isImage(false), originalProcess(parent)
+Thread::Thread(DropArea *parent) : isImage(false)
 {
 	image = new QImage;
 }
@@ -212,7 +211,6 @@ Thread::Thread(DropArea *parent) : isImage(false), originalProcess(parent)
 void Thread::run()
 {
 	bool didItLoad = image->load(imageFileName);
-	connect ( this, SIGNAL(finished()), originalProcess, SLOT(imageLoadingStatus()) );
 	if ( didItLoad )
 	{ isImage = true; }
 	else

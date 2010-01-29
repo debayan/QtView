@@ -12,7 +12,6 @@ class Thread : public QThread
 {
 private:
 	bool isImage;
-	DropArea *originalProcess;
 	QString imageFileName;
 public:
 	QImage *image;
