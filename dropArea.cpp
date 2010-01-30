@@ -8,6 +8,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QMessageBox>
 
 DropArea::DropArea() :  isCtrlPressed(false)
 {
@@ -31,7 +32,7 @@ void DropArea::dragEnterEvent(QDragEnterEvent *event)
     if (!fileName.isNull())
     {
         fileName = fileName.trimmed();
-        fileName = fileName.right(length - 9); // file:// has 7 chars
+		fileName = fileName.right(length - 7); // file:// has 7 chars
         thread->setFileName(fileName);
         thread->start();
     }
@@ -203,7 +204,7 @@ void Thread::setFileName(QString fileName)
 	imageFileName = fileName;
 }
 
-Thread::Thread(DropArea *parent) : isImage(false)
+Thread::Thread(DropArea */*parent*/) : isImage(false)
 {
 	image = new QImage;
 }
@@ -224,3 +225,10 @@ bool Thread::isItAnImage()
 		return false;
 }
 
+void DropArea::openFile(QString fileName)
+{
+	QImage image;
+	image.load(fileName);
+	*pixmap = pixmap->fromImage(image);
+	updateSceneWithImage();
+}

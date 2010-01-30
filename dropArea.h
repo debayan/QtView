@@ -34,6 +34,7 @@ public slots:
 	void scaleView(qreal scaleFactor);
 	void clearView();
 	void imageLoadingStatus();
+	void openFile(QString fileSel);
 
 protected:
 	void dragEnterEvent(QDragEnterEvent *event);

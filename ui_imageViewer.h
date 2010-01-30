@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'imageViewer.ui'
 **
-** Created: Thu Jan 28 17:23:06 2010
-**      by: Qt User Interface Compiler version 4.5.2
+** Created: Sat Jan 30 14:29:23 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -37,12 +37,13 @@ public:
     QPushButton *pushButton_3;
     QPushButton *pushButton_6;
     QPushButton *pushButton_4;
-    QPushButton *pushButton_9;
     QPushButton *pushButton_7;
-    QPushButton *pushButton_2;
     QLabel *label_2;
     QLabel *label_3;
     QLabel *label_4;
+    QPushButton *pushButton_11;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_9;
 
     void setupUi(QWidget *Form)
     {
@@ -58,52 +59,42 @@ public:
         pushButton_5 = new QPushButton(groupBox);
         pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
 
-        gridLayout->addWidget(pushButton_5, 1, 0, 1, 1);
+        gridLayout->addWidget(pushButton_5, 1, 1, 1, 1);
 
         pushButton = new QPushButton(groupBox);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
-        gridLayout->addWidget(pushButton, 2, 0, 1, 1);
+        gridLayout->addWidget(pushButton, 2, 1, 1, 1);
 
         pushButton_8 = new QPushButton(groupBox);
         pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
 
-        gridLayout->addWidget(pushButton_8, 1, 2, 1, 1);
+        gridLayout->addWidget(pushButton_8, 1, 3, 1, 1);
 
         pushButton_10 = new QPushButton(groupBox);
         pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
 
-        gridLayout->addWidget(pushButton_10, 2, 2, 1, 1);
+        gridLayout->addWidget(pushButton_10, 2, 3, 1, 1);
 
         pushButton_3 = new QPushButton(groupBox);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
 
-        gridLayout->addWidget(pushButton_3, 4, 2, 1, 1);
+        gridLayout->addWidget(pushButton_3, 4, 3, 1, 1);
 
         pushButton_6 = new QPushButton(groupBox);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
 
-        gridLayout->addWidget(pushButton_6, 1, 6, 1, 1);
+        gridLayout->addWidget(pushButton_6, 1, 7, 1, 1);
 
         pushButton_4 = new QPushButton(groupBox);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
 
-        gridLayout->addWidget(pushButton_4, 2, 6, 1, 1);
-
-        pushButton_9 = new QPushButton(groupBox);
-        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
-
-        gridLayout->addWidget(pushButton_9, 1, 7, 1, 1);
+        gridLayout->addWidget(pushButton_4, 2, 7, 1, 1);
 
         pushButton_7 = new QPushButton(groupBox);
         pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
 
-        gridLayout->addWidget(pushButton_7, 5, 2, 1, 1);
-
-        pushButton_2 = new QPushButton(groupBox);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-
-        gridLayout->addWidget(pushButton_2, 2, 7, 1, 1);
+        gridLayout->addWidget(pushButton_7, 5, 3, 1, 1);
 
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -112,7 +103,7 @@ public:
         font.setPointSize(16);
         label_2->setFont(font);
 
-        gridLayout->addWidget(label_2, 0, 0, 1, 1);
+        gridLayout->addWidget(label_2, 0, 1, 1, 1);
 
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -122,7 +113,7 @@ public:
         font1.setWeight(50);
         label_3->setFont(font1);
 
-        gridLayout->addWidget(label_3, 0, 2, 1, 1);
+        gridLayout->addWidget(label_3, 0, 3, 1, 1);
 
         label_4 = new QLabel(groupBox);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -130,11 +121,36 @@ public:
         font2.setPointSize(14);
         label_4->setFont(font2);
 
-        gridLayout->addWidget(label_4, 0, 6, 1, 1);
+        gridLayout->addWidget(label_4, 0, 7, 1, 1);
+
+        pushButton_11 = new QPushButton(groupBox);
+        pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
+
+        gridLayout->addWidget(pushButton_11, 1, 0, 1, 1);
+
+        pushButton_2 = new QPushButton(groupBox);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        gridLayout->addWidget(pushButton_2, 4, 0, 1, 1);
+
+        pushButton_9 = new QPushButton(groupBox);
+        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
+
+        gridLayout->addWidget(pushButton_9, 2, 0, 1, 1);
 
 
         verticalLayout_2->addWidget(groupBox);
 
+        QWidget::setTabOrder(pushButton_11, pushButton_9);
+        QWidget::setTabOrder(pushButton_9, pushButton_2);
+        QWidget::setTabOrder(pushButton_2, pushButton_5);
+        QWidget::setTabOrder(pushButton_5, pushButton);
+        QWidget::setTabOrder(pushButton, pushButton_8);
+        QWidget::setTabOrder(pushButton_8, pushButton_10);
+        QWidget::setTabOrder(pushButton_10, pushButton_3);
+        QWidget::setTabOrder(pushButton_3, pushButton_7);
+        QWidget::setTabOrder(pushButton_7, pushButton_6);
+        QWidget::setTabOrder(pushButton_6, pushButton_4);
 
         retranslateUi(Form);
 
@@ -152,12 +168,13 @@ public:
         pushButton_3->setText(QApplication::translate("Form", "Up", 0, QApplication::UnicodeUTF8));
         pushButton_6->setText(QApplication::translate("Form", "Clock Wise", 0, QApplication::UnicodeUTF8));
         pushButton_4->setText(QApplication::translate("Form", "Anti Clock Wise", 0, QApplication::UnicodeUTF8));
-        pushButton_9->setText(QApplication::translate("Form", "Clear", 0, QApplication::UnicodeUTF8));
         pushButton_7->setText(QApplication::translate("Form", "Down", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("Form", "Quit", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Form", "Zoom", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Form", "Pan", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("Form", "Rotate", 0, QApplication::UnicodeUTF8));
+        pushButton_11->setText(QApplication::translate("Form", "Open", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("Form", "Quit", 0, QApplication::UnicodeUTF8));
+        pushButton_9->setText(QApplication::translate("Form", "Clear", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(Form);
     } // retranslateUi
 

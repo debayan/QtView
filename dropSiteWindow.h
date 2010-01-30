@@ -2,6 +2,7 @@
 #define DROPSITEWINDOW_H
 
 #include <QWidget>
+#include <QFileDialog>
 #include "dropArea.h"
 #include "ui_imageViewer.h"
 
@@ -49,6 +50,11 @@ private slots:
 	void rotateClockWiseView()
 	{
 		dropArea->rotateView(5);
+	}
+	void openFile()
+	{
+		QString fileName = QFileDialog::getOpenFileName(this, tr("Open Image"), "~", tr("Image Files (*.png *.jpg *.bmp)"));
+		dropArea->openFile(fileName);
 	}
 private:
 	QPushButton *zoomIn;

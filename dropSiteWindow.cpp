@@ -19,6 +19,7 @@ DropSiteWindow::DropSiteWindow(const QApplication &app)
     connect( imageViewerUi.pushButton_6, SIGNAL(clicked()), this, SLOT(rotateClockWiseView()) );
     connect( imageViewerUi.pushButton_2, SIGNAL(clicked()), &app, SLOT(quit()));
     connect( imageViewerUi.pushButton_9, SIGNAL(clicked()), dropArea, SLOT(clearView()));
+	connect(imageViewerUi.pushButton_11, SIGNAL(clicked()), this, SLOT(openFile()));
 
 	
 	abstractLabel = new QLabel(tr("Drop an Image below"));

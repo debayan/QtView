@@ -20,77 +20,63 @@
       <string>Control Panel</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
+      <item row="1" column="1">
        <widget class="QPushButton" name="pushButton_5">
         <property name="text">
          <string>Zoom In</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="2" column="1">
        <widget class="QPushButton" name="pushButton">
         <property name="text">
          <string>Zoom Out</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="1" column="3">
        <widget class="QPushButton" name="pushButton_8">
         <property name="text">
          <string>Right</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
+      <item row="2" column="3">
        <widget class="QPushButton" name="pushButton_10">
         <property name="text">
          <string>Left</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="2">
+      <item row="4" column="3">
        <widget class="QPushButton" name="pushButton_3">
         <property name="text">
          <string>Up</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="6">
+      <item row="1" column="7">
        <widget class="QPushButton" name="pushButton_6">
         <property name="text">
          <string>Clock Wise</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="6">
+      <item row="2" column="7">
        <widget class="QPushButton" name="pushButton_4">
         <property name="text">
          <string>Anti Clock Wise</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="7">
-       <widget class="QPushButton" name="pushButton_9">
-        <property name="text">
-         <string>Clear</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
+      <item row="5" column="3">
        <widget class="QPushButton" name="pushButton_7">
         <property name="text">
          <string>Down</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="7">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Quit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
+      <item row="0" column="1">
        <widget class="QLabel" name="label_2">
         <property name="font">
          <font>
@@ -103,7 +89,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="0" column="3">
        <widget class="QLabel" name="label_3">
         <property name="font">
          <font>
@@ -117,7 +103,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="6">
+      <item row="0" column="7">
        <widget class="QLabel" name="label_4">
         <property name="font">
          <font>
@@ -129,11 +115,45 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="text">
+         <string>Open</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>Quit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushButton_11</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_4</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
